@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+      let chart, data, options;
+
+      function drawGauge(value) {
+        google.charts.load('current', {'packages':['gauge']});
+        google.charts.setOnLoadCallback(() => {
+          data = google.visualization.arrayToDataTable([
+            ['Label', 'Value'],
+            ['เป้า', 0]
+          ]);
+
+          options = {
+            width: 300,
+            height: 200,
+            redFrom: 80, redTo: 120,
+            yellowFrom: 60, yellowTo: 80,
+            greenFrom: 0, greenTo: 60,
+            minorTicks: 5,
+            max: 120,
+            animation: {duration: 1000, easing: 'out'}
+          };
+
+          chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+          chart.draw(data, options);
+
+          setTimeout(() => {
+            data.setValue(0, 1, value);
+            chart.draw(data, options);
+          }, 300);
+        });
+      }
+
+      function drawViz(data, element) {
+        const value = data.metrics['value']?.values[0] || 0;
+        element.innerHTML = '<div id="chart_div"></div>';
+        drawGauge(value);
+      }
+
+      // Data Studio เรียกใช้
+      window.dscc = {
+        subscribeToData: function(callback) {
+          callback({
+            metrics: { value: { values: [19.33] } }
+          });
+        }
+      };
+
+      window.onload = () => {
+        drawViz({metrics: { value: { values: [19.33] }}}, document.body);
+      };
+    </script>
+  </head>
+  <body>
+    <div id="chart_div"></div>
+  </body>
+</html>

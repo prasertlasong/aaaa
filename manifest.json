@@ -1,0 +1,11 @@
+{
+  "name": "Animated Gauge Chart",
+  "theme": "LIGHT",
+  "components": ["gauge"],
+  "data": {
+    "dimensions": [],
+    "metrics": ["value"]
+  },
+  "style": [],
+  "script": "index.html"
+}
