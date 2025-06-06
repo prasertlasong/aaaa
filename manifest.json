@@ -1,11 +1,22 @@
 {
-  "name": "Animated Gauge Chart",
-  "theme": "LIGHT",
-  "components": ["gauge"],
-  "data": {
-    "dimensions": [],
-    "metrics": ["value"]
+  "dataStudio": {
+    "name": "Animated Gauge Chart",
+    "company": "Your Company",
+    "logoUrl": "https://example.com/logo.png",
+    "addonUrl": "https://example.com",
+    "supportUrl": "https://example.com/support"
   },
-  "style": [],
-  "script": "index.html"
+  "components": {
+    "visualization": "index.html",
+    "style": "style.css"
+  },
+  "fields": {
+    "metrics": [
+      {
+        "id": "value",
+        "name": "Value",
+        "type": "NUMBER"
+      }
+    ]
+  }
 }
